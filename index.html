@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Documentation for Layout Best Practices</title>
+        <!-- http://foundation.zurb.com/forum/posts/1863-foundation-cdn -->
+        <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.6/css/foundation.min.css" media="screen" />
+        <style type="text/css">
+        header h1{
+		color: #fff;
+		font-size: 1.8rem;
+		margin-bottom: 0;
+		padding-bottom: 0;
+        }
+        .sidebar {
+            background: #fafafa;
+            padding: 3rem;
+        }
+        code {
+            border: 0;
+            background-color: transparent;	
+        }
+        </style>
+    </head>
+    <!-- http://alefeuvre.github.io/foundation-grid-displayer/ -->
+    <body data-grid-framework="f4" data-grid-color="blue" data-grid-opacity="0.5" data-grid-zindex="10" data-grid-gutterwidth="30px" data-grid-nbcols="12">
+        <header>
+            <div class="contain-to-grid">
+                <nav class="top-bar" data-topbar role="navigation">
+		    <h1 class="left">Incentergy GmbH</h1>
+                    <section class="top-bar-section">
+                        <!-- Right Nav Section -->
+                        <ul class="right">
+                            <li><a href="mailto:info@manuel-blechschmidt.de">Author: Manuel Blechschmidt</a></li>
+                            <li class="divider"></li>
+                            <li><a name="">Version: 2015-07-24</a></li>
+                        </ul>
+                    </section>
+                </nav>
+            </div>
+        </header>
+        <main class="row">
+            <aside class="large-3 medium-4 columns hide-for-small sidebar">
+                <h4>Select Topic</h4>
+                <ul>
+                    <li><a href="#general">General</a></li>
+                    <li><a href="#base-framework">Base framework</a></li>
+                    <li><a href="#multibrands">Multibrands</a></li>
+                    <li><a href="#worflow-designer">Workflow with designers</a></li>
+                    <li><a href="#updateing-layout">Updating layout</a></li>
+                    <li><a href="#updating">Updating</a></li>
+                    <li><a href="#cool-tools">Cool tools</a></li>
+                    <li><a href="#zurb-5">Zurb 5</a></li>
+                </ul>
+            </aside>
+            <article class="large-9 medium-8 columns">
+                <h1>Layout best practices</h1>
+                <h3 class="subheader">Reusable concepts for best practice ecommerce layouting based on the latest and greatest web standards. For cheaper maintenance and better code.</h3>
+                <hr />
+                <section>
+                    <a name="general"></a>
+                    <h2>General</h2>
+                    <p>The goal is to develop a layout philosophy which is reusable across brands, based on established standards, well documented and supported by Incentergy. It should be modular and updateable across the livetime of a project.</p>
+                    <p>The basic idea of this methodology is to have a base styling which already covers the base cases and can be updated regularly. It must not be changed during a project. Requirements are:
+                    <ul>
+                        <li>Supported by 90% of the browsers</li>
+                        <li>Documented</li>
+                        <li>Responsive</li>
+                        <li>Based on open standards</li>
+                        <li>Optional: support high pixel density devices</li>
+                        <li>Optional: consumable from a <abbr title="Content delivery network">CDN</abbr></li>
+                        <li>Optional: minimizable into one file</li>
+                        <li>Optional: Should automatically generate sprites e.g. <a href="https://github.com/jakesgordon/sprite-factory">Sprite Factory</a></li>
+                        <li>Optional: <a href="http://www.eclipse.org">Eclipse</a> support</li>
+                        <li>Optional: Generate <a href="http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/">source maps</a></li>
+                    </ul>
+                    All enhancements and bug fixes from all projects should be pushed into the main repository and can be pulled</p>
+                </section>
+                <section>
+                    <a name="base-framework"></a>
+                    <h2>Base framework</h2>
+                    <p>To achieve the defined goals a base framework is necessary. This base framework should contain the building blocks for layouting the whole site.</p>
+                    <h3>Forms</h3>
+                    <p>All forms on web shop should look and behave the same. The styling should be compatible with the isinputfield module. So all forms should be supported by default without changing anything on the default HTML.</p>
+                    <h3>Tables</h3>
+                    <p>The base framework should contain default styles for tables to show them in a striped way and to highlight the currently hovered row. This makes the tables easier to read.</p>
+                    <h3>Business classes</h3>
+                    <p>Basis classes for indicating business events should be supported in paritcular:
+                    <ul>
+                        <li><span class="label success">Success e.g. applying a coupon, in stock</span></li>
+                        <li><span class="label secondary">Information e.g. current promotion, approaching discounts</span></li>
+                        <li><span class="label warning">Warning e.g. coupon not active, product low on stock</span></li>
+                        <li><span class="label alert">Error e.g. wrong username, coupon not found, not in stock</span></li>
+                    </ul>
+                    </p>
+                    <h3>Normalization</h3>
+                    <p>This part of the code should make sure that all browser behave in the same way by setting all the styles to a specified default. Typically <a href="https://github.com/necolas/normalize.css">normalize.css</a> is used. <a href="http://necolas.github.io/normalize.css/latest/test.html">They provide a test page.</a></p>
+                    <h3>Mixins for responsive grid</h3>
+                    <figure>
+                        <img src="../img/responsive-design.svg" alt="Responsive design" />
+                        <figcaption>Responsive design should support multiple view ports</figcaption>
+                    </figure>
+                    <p>This is the most important part. The base framework should offer classes that make it possible to map the normal semantic elements and classes of a normal <abbr title="Hypertext Markup Language">HTML</abbr> page to different width on differnet device sizes. It is recommended to support 3 viewports desktop, tablet and mobile. Nevertheless the website should be fluid and resize according to width of the device.</p>
+                    <h3>Multiple device styles</h3>
+                    <p>It should be possible to restrict content to device type e.g. <strong>mobile</strong>, <strong>print</strong> and <strong>screenreader</strong>.  </p>
+                    <h3>Accessibility</h3>
+                    <p>The framework should follow <a href="http://www.w3.org/TR/1999/WAI-WEBCONTENT-19990505/">best practice accessibility guidelines according to W3C</a>. An even more restricted list is given by the german <a href="http://www.biene-award.de/pruefschritte/">BIENE award</a>. In general using accessibility guidlines make maintenance a lot cheaper. Nice side effects are that the HTML5 is wellformed and therefore parseable by an ordinary XML parser. Testing tools that do browser automation like <a href="http://www.seleniumhq.org/">Selenium</a> or <a href="http://casperjs.org/">CasperJS</a> can use the site easily as well.</p>
+    <h3>Non parts of base framework</h3>
+                    <p>It should not contain the following things:
+                    <ul>
+                        <li>Colors</li>
+                        <li>Fonts</li>
+                        <li>Absolute pixel measures for positioning, padding, margin or line-height</li>
+                        <li>Dependencies to javascript</li>
+                    </ul></p>
+                </section>
+                <section>
+                    <a name="multibrands"></a>
+                    <h2>Multibrand environments</h2>
+                    <figure>
+                        <img src="../img/Multi-Brand-Layout.svg" alt="Multi brand layout" />
+                        <figcaption>Multibrand layouts with grid mapping and style guide</figcaption>
+                    </figure>
+                    <p>eCommrece systems are typically hosting multiple brands. In a perfect world the templates would stay consistent and only the <abbr title="Cascading style sheets">CSS</abbr> would be changed for a new brand. <a href="http://www.csszengarden.com/">CSS Zen Gargen</a> shows in an impressive way what is possible with semantic <abbr title="Hypertext Markup Language">HTML</abbr> code and smart <abbr title="Cascading style sheets">CSS</abbr> coding.</p>
+                </section>
+                <section>
+                	<a name="worflow-designer"></a>
+                	<h2>Workflow with designers</h2>
+                	<p>It is likely that there is an assigned person or an assigned team responsible for the design of one brand. The next section outlines the workflow how to collaborate with this person or team. The workflow supports and expects the following:
+                	<ol>
+                		<li>The design is delivered in incremental steps</li>
+                		<li>The design is delivered as code e.g. SCSS</li>
+                		<li>The designer takes responsibility aboud the look and feel of the website</li>
+                		<li>The design team contains an expert in CSS</li>
+                		<li>The tech lead is able on a daily basis to integrate pull requests</li>
+                	</ol>
+                	<h3>Static interactive prototype approach</h3>                	
+                	<figure>
+                        <img src="../img/PrototypeApproach.svg" alt="Static prototype approach" />
+                    </figure>
+                    <p>The image above shows that the designers are locally working with a static prototype. The static prototype is part of the base framework and should be in sync with the latest release of the ecommerce platform. That makes it possible to easily style new features and aftwards enable them on the storefront. Using an interactive prototype guarantees that there are only loosly coupled dependencies but that the produced deliverables are directly usable by the developers team.</p>
+                    <p>The framework maintainer makes sure that the static prototype is always in sync with the most revent release</p>
+                    <p>The designers can create spike solutions to build different campaigns for the business and the business can approve these solutions.</p>
+                	<h3>Process</h3>
+                	<figure>
+                        <a href="../img/ProjectDesignFlow.svg" title="Directly to this image"><img src="../img/ProjectDesignFlow.svg" alt="Multi brand layout" /></a>
+                        <figcaption class="text-center">Click on the picture to magnify</figcaption>
+                    </figure>
+                    <p>
+                    The picture above shows how to handle the project design flow. The designers get an introduction into distributed version control and pull requests by the Teach Lead. Afterwards they clone the base framework repository from the official project repository. Now they can start to add designs and code CSS in the repository. All the time when they reached a certain milestone they can open a pull request to get a review for there code and integrate it into the main development repository.
+                    </p>
+                	<h3>Technical architecture</h3>
+                	<figure>
+                        <img src="../img/Designer%20Workflow.svg" alt="Designer technical workflow" />
+                    </figure>
+                    <p>
+                    	The designer can work in an incremental way. They can collaborate with each other and in the end will request the tech lead to integrate their designs into the system.
+                	</p>
+                </section>
+                <section>
+                    <h2>Updating parts of the layouts</h2>
+                	<a name="updateing-layout"></a>
+                    <figure>
+                        <img src="../img/Layout-Framework-Submodule.svg" alt="Multi brand layout" />
+                    </figure>
+                    <p>
+                    The framework maintainer has the task to always care that the latest and greatest functionality is supported by the framework. Further he has to integrate bug fixes and features that are implemented during a project.
+                    </p>
+                </section>
+                <section>
+                	<a name="cool-tools"></a>
+                    <h2>Cool Tools</h2>
+                    <ul>
+                        <li><a href="http://emmet.io/">Emmet</a></li>
+                        <li><a href="http://csslint.net/">csslint</a></li>
+                        <li><a href="http://jigsaw.w3.org/css-validator/">CSS Validator</a></li>
+                        <li><a href="http://alefeuvre.github.io/foundation-grid-displayer/">http://alefeuvre.github.io/foundation-grid-displayer/</a></li>
+                        <li><a href="http://responsive.victorcoulon.fr/">http://responsive.victorcoulon.fr/</a></li>
+                        <li><a href="http://david.dojotoolkit.org/recss.html">ReCSS</a></li>
+                        <li><a href="https://github.com/begriffs/css-ratiocinator">https://github.com/begriffs/css-ratiocinator</a></li> 
+                    </ul>
+                    <figure>
+                        <img src="../img/Grid-Display-Bookmarklet.png" alt="Multi brand layout" />
+                        <figcaption>Multibrand layouts with grid mapping and style guide</figcaption>
+                    </figure>
+                    <h3>CSS Ratiocinator</h3>
+                    <p>This tools makes it possible to extract from a website all really used CSS rules by taking the rendered page and reverse engering the CSS that is necessary to display the DOM in the way it is displayed. This is especially helpful if CSS grew over a long period of time and the code should be reduced. Currently SCSS is supported as well by feeding the output through <a href="http://blog.derekperez.com/post/816063805/move-you-existing-stylebase-over-to-sass-or-scss" title="Blog post about sass-convert">sass-convert</a></p>
+                </section>
+                <section>
+                	<a name="zurb-5"></a>
+                    <h2>Implementation with ZURB 5</h2>
+                    <ul>
+                        <li>It is based on SASS</li>
+                        <li>It is lightweight</li>
+                        <li>It is well documented and accepted</li>
+                        <li>It includes a grid system</li>
+                        <li>It is responsive by default</li>
+                    </ul>
+                    <h3>Watching SCSS files</h3>
+                    <p>It is important that the precossor is fast to have short turn around cycles between changing scss files and seeing the result in the browser. The ruby command line tool sass can take up to 30s for bigger scss projects e.g. foundation. So it is recommended to use the fast <a href="http://benfrain.com/lightning-fast-sass-compiling-with-libsass-node-sass-and-grunt-sass/">c++ implementation libsass</a>. <a href="https://github.com/sass/libsass">It is hosted on github</a> and the <a href="http://libsass.org/">project website is libsass.org</a>. The easiest way is to use the node-sass --watch option</a>
+                <pre class="brush: bash">
+                    # on mac os x 10.10 including installed XCode 8.1, git and node
+                    git clone https://github.com/sass/libsass.git
+                    cd libsass
+                    make
+                    sudo make install
+                    sudo npm -g install node-sass
+                    node-sass --watch style.scss
+                </pre>
+                </p>
+                </section>
+            </article>
+            </main>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.6/js/vendor/jquery.js" type="text/javascript"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.6/js/foundation.min.js" type="text/javascript"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.6/js/foundation/foundation.topbar.min.js" type="text/javascript"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.6/js/vendor/modernizr.js" type="text/javascript"></script>
+        <script>
+$(document).foundation();
+        </script>
+        <script src="http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js" type="text/javascript"></script><script src="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushBash.js" type="text/javascript">// <![CDATA[</p>
+<p>// ]]&gt;</script>
+<!-- Finally, to actually run the highlighter, you need to include this JS on your page --><script type="text/javascript">// <![CDATA[
+SyntaxHighlighter.all()
+// ]]&gt;</script>
+
+    </body>
+</html>
